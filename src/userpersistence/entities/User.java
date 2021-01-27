@@ -5,6 +5,7 @@
  */
 package userpersistence.entities;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -64,7 +65,7 @@ public class User {
         sb.append("User{id=").append(id);
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
-        sb.append('}');
+        sb.append("}\n");
         return sb.toString();
     }
 

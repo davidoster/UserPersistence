@@ -5,6 +5,7 @@
  */
 package userpersistence;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,13 +21,13 @@ public class UserPersistence {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         String persistenceUnit = "UserPersistencePU";
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnit);
         EntityManager em = emf.createEntityManager();
-        
+
         User user = new User();
-        
+
         user.setUsername("gkpaaaa");
         user.setPassword("gkppassaaaa");
 //        System.out.println("before:" + user);
@@ -46,12 +47,20 @@ public class UserPersistence {
         /* END OF DELETE */
 
  /* UPDATE */
-        em.getTransaction().begin();
-        user = em.find(User.class, new Long(7));
-        user.setUsername("DDDD");
-        user.setPassword("EEEE");
-        em.getTransaction().commit();
+//        em.getTransaction().begin();
+//        user = em.find(User.class, new Long(7));
+//        user.setUsername("DDDD");
+//        user.setPassword("EEEE");
+//        em.getTransaction().commit();
         /* END OF UPDATE */
+
+ /* SELECT */
+        em.getTransaction().begin();
+        List<User> users = em.createQuery("SELECT u FROM User u").getResultList();
+        System.out.println(users);
+
+//        em.getTransaction().commit();
+        /* END OF SELECT */
     }
-    
+
 }
